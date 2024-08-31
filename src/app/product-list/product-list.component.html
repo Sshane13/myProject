@@ -1,10 +1,16 @@
 <div class="product-list">
-    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
-    <div *ngFor="let product of products" class="product-item">
+<div *ngIf="products.length; else noProducts">
+  <div *ngFor="let product of products" class="product-item">
+    <a [routerLink]="['/product', product.id]">
       <h3>{{ product.title }}</h3>
-      <p>{{ product.description }}</p>
-      <p><strong>Price:</strong> ${{ product.price }}</p>
       <img [src]="product.image" alt="{{ product.title }}" />
-    </div>
+    </a>
+    <p>{{ product.description }}</p>
+    <p>Price: {{ product.price | currency }}</p>
+    
+</div>
   </div>
-  
+</div>
+<ng-template #noProducts>
+  <p>No products available.</p>
+</ng-template>

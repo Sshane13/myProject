@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
-
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-product-list',
   standalone: true,
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
-  imports: [CommonModule, HttpClientModule] // Include HttpClientModule here
+  imports: [CommonModule, HttpClientModule,RouterModule] // Include HttpClientModule here
 })
 export class ProductListComponent implements OnInit {
   products: any[] = [];

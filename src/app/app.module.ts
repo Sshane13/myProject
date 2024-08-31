@@ -1,26 +1,27 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductFormComponent } from './product-form/product-form.component';
-import { AppRoutingModule } from './app-routing.module';
-import {  CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { routes } from './app.routes';
+
 @NgModule({
   declarations: [
     AppComponent,
     ProductListComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
+    HttpClientModule, // Add HttpClientModule here
     ReactiveFormsModule,
-    AppRoutingModule
+    RouterModule.forRoot(routes)
   ],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
 })
