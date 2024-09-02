@@ -4,6 +4,7 @@
   <p>Price: {{ product.price | currency }}</p>
   <img [src]="product.image" alt="{{ product.title }}">
 </div>
+
 <div *ngIf="errorMessage">
   <p>{{ errorMessage }}</p>
 </div>

@@ -8,10 +8,10 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { routes } from './app.routes';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
-    AppComponent,
     ProductListComponent,
     ProductFormComponent,
     ProductDetailComponent
@@ -20,7 +20,8 @@ import { routes } from './app.routes';
     BrowserModule,
     HttpClientModule, // Add HttpClientModule here
     ReactiveFormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

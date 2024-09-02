@@ -1,16 +1,26 @@
+<div class="category-filter">
+  <label for="category">Select a category:</label>
+  <select id="category" [(ngModel)]="selectedCategory" (change)="filterByCategory()">
+    <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+  </select>
+</div>
+
 <div class="product-list">
-<div *ngIf="products.length; else noProducts">
-  <div *ngFor="let product of products" class="product-item">
-    <a [routerLink]="['/product', product.id]">
-      <h3>{{ product.title }}</h3>
-      <img [src]="product.image" alt="{{ product.title }}" />
-    </a>
-    <p>{{ product.description }}</p>
-    <p>Price: {{ product.price | currency }}</p>
+  <div *ngIf="sortedProducts?.length; else noProducts">
+    <button (click)="sortByPrice()">Sort by Price</button>
+    <button (click)="sortByRating()">Sort by Rating</button>
     
-</div>
+    <div *ngFor="let product of sortedProducts" class="product-item">
+      <a [routerLink]="['/product', product.id]">
+        <h3>{{ product.title }}</h3>
+        <img [src]="product.image" alt="{{ product.title }}" />
+      </a>
+      <p>{{ product.description }}</p>
+      <p>Price: {{ product.price | currency }}</p>
+      <p *ngIf="product.rating">Rating: {{ product.rating.rate }} ({{ product.rating.count }} reviews)</p>
+    </div>
   </div>
+  <ng-template #noProducts>
+    <p>No products available.</p>
+  </ng-template>
 </div>
-<ng-template #noProducts>
-  <p>No products available.</p>
-</ng-template>

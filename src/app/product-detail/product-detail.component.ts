@@ -1,28 +1,24 @@
-// product-detail.component.ts
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ProductService } from '../services/product.service';
+import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-
+import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
+import { RouterModule } from '@angular/router';
+import { Product } from '../product.model';
 @Component({
   selector: 'app-product-detail',
   standalone: true,
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.scss'],
-  imports: [CommonModule] // Remove HttpClientModule here
+  imports: [CommonModule, HttpClientModule, RouterModule] // Include HttpClientModule here
 })
 export class ProductDetailComponent implements OnInit {
   product: any;
   errorMessage: string = '';
 
-  constructor(
-    private route: ActivatedRoute,
-    private productService: ProductService
-  ) {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    const productId = Number(this.route.snapshot.paramMap.get('id'));
-
+    const productId = 1; // Replace with dynamic product ID as needed
     if (productId) {
       this.fetchProductDetails(productId);
     } else {
@@ -31,12 +27,17 @@ export class ProductDetailComponent implements OnInit {
   }
 
   fetchProductDetails(id: number): void {
-    this.productService.getProductById(id).subscribe({
-      next: (product) => (this.product = product),
-      error: (error) => {
-        this.errorMessage = 'Failed to load product details.';
-        console.error('Error fetching product:', error);
-      },
-    });
+    console.log(`Fetching details for product ID: ${id}...`);
+    this.http.get(`https://fakestoreapi.com/products/${id}`)
+      .subscribe({
+        next: product => {
+          console.log('Product details data:', product);
+          this.product = product;
+        },
+        error: error => {
+          this.errorMessage = 'Failed to load product details.';
+          console.error('Http error:', error);
+        }
+      });
   }
 }
