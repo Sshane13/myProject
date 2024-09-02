@@ -1,10 +1,12 @@
-<div *ngIf="product">
+
+<div *ngIf="product" class="product-details">
   <h2>{{ product.title }}</h2>
   <p>{{ product.description }}</p>
-  <p>Price: {{ product.price | currency }}</p>
+  <p class="price">Price: {{ product.price | currency }}</p>
   <img [src]="product.image" alt="{{ product.title }}">
 </div>
 
-<div *ngIf="errorMessage">
+<div *ngIf="errorMessage" class="error-message">
   <p>{{ errorMessage }}</p>
 </div>
+

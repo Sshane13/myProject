@@ -9,7 +9,7 @@ import { ProductFormComponent } from './product-form/product-form.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { routes } from './app.routes';
 import { CommonModule } from '@angular/common';
-
+import {  provideHttpClient, withFetch } from '@angular/common/http';
 @NgModule({
   declarations: [
     ProductListComponent,
@@ -21,9 +21,11 @@ import { CommonModule } from '@angular/common';
     HttpClientModule, // Add HttpClientModule here
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
-    CommonModule
+    CommonModule,
+    
+    
   ],
-  providers: [],
+  providers: [provideHttpClient(withFetch())],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
-import { RouterModule } from '@angular/router';
+import { RouterModule, ActivatedRoute } from '@angular/router'; // Import ActivatedRoute
 import { Product } from '../product.model';
+
 @Component({
   selector: 'app-product-detail',
   standalone: true,
@@ -15,12 +16,16 @@ export class ProductDetailComponent implements OnInit {
   product: any;
   errorMessage: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private route: ActivatedRoute // Inject ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    const productId = 1; // Replace with dynamic product ID as needed
+    // Get productId from route parameters
+    const productId = this.route.snapshot.paramMap.get('id');
     if (productId) {
-      this.fetchProductDetails(productId);
+      this.fetchProductDetails(Number(productId));
     } else {
       this.errorMessage = 'Invalid product ID.';
     }
